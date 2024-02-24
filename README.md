@@ -27,7 +27,7 @@ Features:
 - RageUI menu
 
 ## Vidéo
-https://youtu.be/G8zTOF0x32s
+https://youtu.be/cX1-LzVR0Vc
 
 ## Discord
 https://discord.gg/X9ReemrhKh
