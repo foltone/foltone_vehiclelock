@@ -26,7 +26,13 @@ Features:
 - Configurable
 - RageUI menu
 
-Available triggers:
+## Vidéo
+https://youtu.be/G8zTOF0x32s
+
+## Discord
+https://discord.gg/X9ReemrhKh
+
+## Available triggers:
 - Verifying if have a key for the vehicle plate
 ```lua
 ESX.TriggerServerCallback('foltone_vehiclelock:hasKey', function(hasKey)
