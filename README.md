@@ -32,6 +32,10 @@ https://youtu.be/G8zTOF0x32s
 ## Discord
 https://discord.gg/X9ReemrhKh
 
+## Requirements
+- [es_extended](https://github.com/esx-framework/esx_core/tree/main/%5Bcore%5D/es_extended)
+- [oxmysql](https://github.com/overextended/oxmysql)
+
 ## Available triggers:
 - Verifying if have a key for the vehicle plate
 ```lua
