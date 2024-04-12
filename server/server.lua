@@ -17,10 +17,10 @@ end)
 
 ESX.RegisterServerCallback("foltone_vehiclelock:getNewKeys", function(source, cb)
     local xPlayer = ESX.GetPlayerFromId(source)
-    local identifier = xPlayer.getIdentifier()
+    local owner = xPlayer.getIdentifier()
     local newKeys = {}
-    MySQL.Async.fetchAll("SELECT owned_vehicles.plate FROM owned_vehicles LEFT JOIN key_vehicles ON owned_vehicles.plate = key_vehicles.plate WHERE key_vehicles.plate IS NULL OR key_vehicles.owner != @owner", {
-        ["@owner"] = identifier
+    MySQL.Async.fetchAll("SELECT owned_vehicles.plate FROM owned_vehicles LEFT JOIN key_vehicles ON owned_vehicles.plate = key_vehicles.plate WHERE key_vehicles.owner IS NULL AND owned_vehicles.owner = @owner", {
+        ["@owner"] = owner
     }, function(result)
         for i = 1, #result, 1 do
             for j = 1, #newKeys, 1 do

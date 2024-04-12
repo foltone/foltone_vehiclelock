@@ -154,10 +154,9 @@ function RageUI.PoolMenus:FoltoneKeys()
 end
 
 CreateThread(function()
-    -- while not playerLoaded do
-    --     Wait(500)
-
-    -- end
+    while not playerLoaded do
+        Wait(500)
+    end
     for k, v in pairs(Config.listKeyShop) do
         local pedModel = GetHashKey(v.pedModel)
         RequestModel(pedModel)
