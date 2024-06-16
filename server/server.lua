@@ -72,6 +72,15 @@ AddEventHandler("foltone_vehiclelock:removeKey", function(id)
     })
 end)
 
+RegisterServerEvent("foltone_vehiclelock:addKey")
+AddEventHandler("foltone_vehiclelock:addKey", function(target, plate)
+    local xPlayer = ESX.GetPlayerFromId(target)
+    MySQL.Async.execute("INSERT INTO key_vehicles (owner, plate) VALUES (@owner, @plate)", {
+        ["@owner"] = xPlayer.getIdentifier(),
+        ["@plate"] = plate
+    })
+end)
+
 RegisterServerEvent("foltone_vehiclelock:handingKey")
 AddEventHandler("foltone_vehiclelock:handingKey", function(target, plate)
     local xPlayer = ESX.GetPlayerFromId(source)
