@@ -63,7 +63,11 @@ ESX.TriggerServerCallback('foltone_vehiclelock:buyKey', function(bought)
     end
 end, vehiclePlate)
 ```
-- Giving a key
+- Add a new key to player
+```lua
+TriggerServerEvent('foltone_vehiclelock:addKey', GetPlayerServerId(player), vehiclePlate, label, temporary, job)
+```
+- Giving a key player to player (replace the owner)
 ```lua
 TriggerServerEvent('foltone_vehiclelock:handingKey', GetPlayerServerId(player), vehiclePlate)
 ```

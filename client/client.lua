@@ -24,8 +24,6 @@ local function KeyboardInput(TextEntry, ExampleText, MaxStringLenght)
     end
 end
 
-local playerLoaded = false
-
 local newKeys = {}
 
 Config.CallESX()
@@ -128,7 +126,6 @@ local menuKeys = RageUI.CreateMenu(nil, _U("menu_subtitle"), nil, nil, "shopui_t
 local open = false
 function RageUI.PoolMenus:FoltoneKeys()
     menuKeys.Closed = function()
-        FreezeEntityPosition(PlayerPedId(), false)
         open = false
     end
     menuKeys:IsVisible(function(Items)
@@ -139,8 +136,8 @@ function RageUI.PoolMenus:FoltoneKeys()
                         setTimeout(500)
                         ESX.TriggerServerCallback("foltone_vehiclelock:buyKey", function(bought)
                             if bought then
-                                table.remove(newKeys, i)
                                 Config.Notification(_U("key_bought", newKeys[i]))
+                                table.remove(newKeys, i)
                             else
                                 Config.Notification(_U("no_money"))
                             end
@@ -154,7 +151,7 @@ function RageUI.PoolMenus:FoltoneKeys()
 end
 
 CreateThread(function()
-    while not playerLoaded do
+    while not ESX.PlayerLoaded do
         Wait(500)
     end
     for k, v in pairs(Config.listKeyShop) do
@@ -191,13 +188,15 @@ CreateThread(function()
                 wait = 0
                 Config.DisplayHelpText(_U("press_to_open"))
                 if IsControlJustReleased(0, 38) then
-                    FreezeEntityPosition(playerPed, true)
                     open = true
                     ESX.TriggerServerCallback("foltone_vehiclelock:getNewKeys", function(data)
                         newKeys = data
                         RageUI.Visible(menuKeys, not RageUI.Visible(menuKeys))
                     end)
                 end
+            elseif distance > 1.5 and open then
+                RageUI.CloseAll()
+                open = false
             end
         end
         Wait(wait)
@@ -207,5 +206,5 @@ end)
 RegisterNetEvent("esx:playerLoaded")
 AddEventHandler("esx:playerLoaded", function(xPlayer)
     ESX.PlayerData = xPlayer
-    playerLoaded = true
+    ESX.PlayerLoaded = true
 end)
